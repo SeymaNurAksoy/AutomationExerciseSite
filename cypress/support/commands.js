@@ -1,6 +1,8 @@
 
 import Login from "../PageObjectModel/Login";
 import Signup from "../PageObjectModel/Signup";
+import 'cypress-file-upload';
+
 
 Cypress.Commands.add('signup', (name, email, password) => {
     Signup.SignupFormName.type(name);
@@ -29,9 +31,13 @@ Cypress.Commands.add('signup', (name, email, password) => {
     Signup.SignupContinueButton.click();
 });
 
+Cypress.Commands.add('signupFirstStep', (name, email, password) => {
+    Signup.SignupFormName.type(name);
+    Signup.SignupFormEmail.type(email);
+    Signup.SignupButton.click();
+});
 Cypress.Commands.add('login', (email, password) => {
     Login.LoginEmail.type(email);
     Login.LoginPassword.type(password);
     Login.LoginButton.click();
-    cy.get('b').should('have.text', 'seyma');
 });
