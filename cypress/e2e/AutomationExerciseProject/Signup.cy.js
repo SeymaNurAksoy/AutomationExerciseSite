@@ -77,7 +77,7 @@ describe('Signup ,Login,Logout,Delete Account', () => {
       cy.get('.status').should('have.text', 'Success! Your details have been submitted successfully.');
     });
 
-    it.only('Verify Test Cases Page', () => {
+    it('Verify Test Cases Page', () => {
       homePage.navigateToHomePage();
       cy.url().should('include', 'automationexercise.com');
       cy.title().should('include', 'Automation Exercise');
