@@ -16,6 +16,9 @@ describe('Products and product detail page', () => {
         cy.get('.product-information > :nth-child(7)').should('have.text', 'Condition: New');
         cy.get(':nth-child(5) > span').should('have.text', 'Rs. 500');
         cy.get('.product-information > :nth-child(8)').should('have.text', 'Brand: Polo');
+        cy.go('back');
+        cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
+        cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
 
     });
 
