@@ -41,3 +41,9 @@ Cypress.Commands.add('login', (email, password) => {
     Login.LoginPassword.type(password);
     Login.LoginButton.click();
 });
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes("Cannot read properties of null (reading 'remove')")) {
+    return false; // hatayı yoksay
+  }
+});

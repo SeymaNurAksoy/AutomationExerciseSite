@@ -78,7 +78,7 @@ describe('Products and product detail page', () => {
         cy.get(':nth-child(4) > .cart_total_price').should('have.text', 'Rs. 900');
         cy.go('back');
         cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
-        cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
+        cy.get('.cart_quantity_delete > .fa').click({ multiple: true });
 
     });
 });
