@@ -76,7 +76,7 @@ describe('Products and product detail page', () => {
         cy.get('#product-2 > .cart_quantity > .disabled').should('have.text', '1');
         cy.get('.col-sm-6 > .btn').click();
         cy.get(':nth-child(4) > .cart_total_price').should('have.text', 'Rs. 900');
-        cy.go('-1');
+        cy.go('back');
         cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
         cy.get('#product-1 > .cart_delete > .cart_quantity_delete').click();
 
