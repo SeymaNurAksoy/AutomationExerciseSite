@@ -194,7 +194,7 @@ describe('Products and product detail page', () => {
         cy.get(':nth-child(3) > .product-image-wrapper > .single-products > .productinfo > p').should('have.text', 'Sleeveless Dress');
 
     });
-    it.only('View & Cart Brand Products', () => {
+    it('View & Cart Brand Products', () => {
         homePage.navigateToHomePage();
         cy.url().should('include', 'automationexercise.com');
         cy.title().should('include', 'Automation Exercise');
@@ -205,7 +205,54 @@ describe('Products and product detail page', () => {
         cy.get('.brands-name > .nav > :nth-child(1) > a').click();
         cy.get('.title').should('contain', 'Brand - Polo Products');
         cy.get('.active').should('contain', 'Polo');
-        
+    });
+
+    it('Search Products and Verify Cart After Login', () => {
+        homePage.navigateToHomePage();
+        cy.url().should('include', 'automationexercise.com');
+        cy.title().should('include', 'Automation Exercise');
+        cy.get('.shop-menu > .nav > :nth-child(2) > a').click();
+        cy.get('.features_items > h2').should('have.text', 'All Products');
+        cy.get('#search_product').type('Blue Top');
+        cy.get('#submit_search').click();
+        cy.get('.title').should('have.text', 'Searched Products');
+        cy.get('.productinfo > p').should('have.text', 'Blue Top');
+        cy.get('.productinfo > .btn').should('have.text', 'Add to cart');
+        cy.get('.productinfo > .btn').click();
+        cy.get('u').click();
+        cy.get('h4 > a').should('have.text', 'Blue Top');
+        homePage.clickOnLogin();
+        cy.login('hello12345seyma@gmail.com', '12345678');
+        cy.get('.shop-menu > .nav > :nth-child(3)').click();
+        cy.get('.cart_description > h4').should('have.text', 'Blue Top');
+        cy.get('a > b').should('have.text', 'seyma');
+    });
+
+    it('Add review on product', () => {
+        homePage.navigateToHomePage();
+        cy.url().should('include', 'automationexercise.com');
+        cy.title().should('include', 'Automation Exercise');
+        cy.get('.shop-menu > .nav > :nth-child(2) > a').click();
+        cy.get('.features_items > h2').should('have.text', 'All Products');
+        cy.get(':nth-child(3) > .product-image-wrapper > .choose > .nav > li > a').click();
+        cy.get('.product-information > h2').should('have.text', 'Blue Top');
+        cy.get('.active > a').should('have.text', 'Write Your Review');
+        cy.get('#name').type('Test User');
+        cy.get('#email').type('ggg@gmail.com');
+        cy.get('#review').type('This is a great product!');
+        cy.get('.btn').contains('Submit').click();
+        cy.get('.alert-success').should('contain', 'Thank you for your review.');
+    });
+
+    it.only('Add to cart from Recommended items', () => {
+        homePage.navigateToHomePage();
+        cy.url().should('include', 'automationexercise.com');
+        cy.title().should('include', 'Automation Exercise');
+        cy.get('.recommended_items > .title').should('have.text', 'recommended items');
+        cy.get('.active > :nth-child(3) > .product-image-wrapper > .single-products > .productinfo > .btn').click();
+        cy.get('u').click();
+
+        cy.get('.cart_quantity > .disabled').should('have.text', '1');
 
     });
 
